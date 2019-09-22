@@ -1,5 +1,5 @@
 #!/bin/bash
-# 06_run_freebayes.sh
+# 06_freebayes.sh
 #
 
 # Copy script as it was run
@@ -24,17 +24,23 @@ module load freebayes
 module load vcflib
 
 # Parallelize freebayes calling over 1 Mb regions
-01_scripts/util/fasta_generate_regions.py "$GENOME".fai 1000000 | 
-    parallel --progress --joblog $LOG_FOLDER/"$TIMESTAMP"_freebayes.log -k -j $NCPUS \
-    freebayes \
-        -f $GENOME \
-        --region {} \
-        -p $PLOIDY \
-        $POOL_MODEL \
-        --max-coverage $MAX_COV \
-        $INPUT/*.bam | 
-    $VCFLIB/scripts/vcffirstheader |
-    $VCFLIB/bin/vcfstreamsort -w 1000 | 
-    $VCFLIB/bin/vcfuniq > $OUTPUT/freebayes_unfiltered.vcf
+for file in $(ls "$INPUT"/*.bam | perl -pe 's/\.bam//g')
+do
+    name=$(basename $file)
+    
+    echo "Calling SNPs in: $file"
+    
+	01_scripts/util/fasta_generate_regions.py "$GENOME".fai 1000000 | 
+    	parallel --progress --joblog $LOG_FOLDER/"$TIMESTAMP"_freebayes.log -k -j $NCPUS \
+    	freebayes \
+        	-f $GENOME \
+        	--region {} \
+        	-p $PLOIDY \
+        	$POOL_MODEL \
+        	--max-coverage $MAX_COV \
+        	"$file".bam | 
+    	$VCFLIB/scripts/vcffirstheader |
+    	$VCFLIB/bin/vcfstreamsort -w 1000 | 
+    	$VCFLIB/bin/vcfuniq | gzip > $OUTPUT/"$name"_freebayes.vcf.gz
 
-
+done

@@ -14,7 +14,7 @@ GATK="/home/kylewellband/.bin/gatk/gatk" # Path to GATK4 wrapper
 INPUT="05_aligned_bam"
 OUTPUT="06_deduplicated_bam"
 METRICS="11_metrics"
-
+JAVA_OPTS="-Xmx16G"
 
 # Load needed modules
 module load java/jdk/1.8.0_102
