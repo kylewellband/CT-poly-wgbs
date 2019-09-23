@@ -31,4 +31,4 @@ samtools fadix "$GENOME"
 $GATK --java-options $JAVA_OPTS \
     CreateSequenceDictionary \
     -R $GENOME
-    -O ${GENOME%.*}.dict
+
