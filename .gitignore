@@ -8,6 +8,7 @@
 *.ids
 *.json
 *.log
-*_bowtie2
+*.vcf
 *~
-10_logfiles/*
+10_log_files/*
+11_metrics/*
