@@ -26,7 +26,7 @@ echo "Building ${GENOME} index"
 
 bwa index "$GENOME"
 
-samtools fadix "$GENOME"
+samtools faidx "$GENOME"
 
 $GATK --java-options $JAVA_OPTS \
     CreateSequenceDictionary \
