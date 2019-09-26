@@ -15,6 +15,7 @@ INPUT="05_aligned_bam"
 OUTPUT="06_deduplicated_bam"
 METRICS="11_metrics"
 JAVA_OPTS="-Xmx16G"
+TMPDIR="99_tmp"
 
 # Load needed modules
 module load java/jdk/1.8.0_102
@@ -27,10 +28,11 @@ do
     echo "Deduplicating sample: $name"
 
     $GATK --java-options $JAVA_OPTS \
-        MarkDuplicatesWithMateCigar \
-        -I "$file" \
+        MarkDuplicates \
+        -I $INPUT/"$name".bam \
         -O $OUTPUT/"$name".dedup.bam \
         -M "$METRICS"/"$name".metrics.txt \
+        --TMP_DIR $TMPDIR \
         --REMOVE_DUPLICATES true \
         --use_jdk_inflater \
         --use_jdk_deflater
