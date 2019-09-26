@@ -38,6 +38,7 @@ do
 		--dont-use-soft-clipped-bases \
 		--sample-ploidy $PLOIDY \
 		--max-reads-per-alignment-start $MAX_COV \
+		--max-alternate-alleles 3 \
 		--use-jdk-inflater \
 		--use-jdk-deflater
     

@@ -16,7 +16,7 @@ INPUT="07_clipped_overlap"
 OUTPUT="08_raw_vcfs"
 NCPUS=4
 PLOIDY=80 # this should be N individuals x 2 for diploid organisms
-POOL_MODEL="--pooled-discrete --use-best-n-alleles 4" # should I be using "-F 0.01 -C 2 --pooled-continuous" ?
+POOL_MODEL="-F 0.01 -C 2 --pooled-continuous" # alternative to give similar results to GATK: "--pooled-discrete --use-best-n-alleles 3"
 MAX_COV=100 # maximum depth, exclude sites above this depth
 
 # Modules
