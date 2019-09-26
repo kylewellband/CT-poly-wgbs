@@ -26,7 +26,7 @@ do
 
     # Clip overlap
     bam clipOverlap \
-        --in "$file" \
+        --in $INPUT/"$name".bam \
         --out -.ubam \
         --unmapped --storeOrig OC --stats |
     samtools view -b -F 4 - \
