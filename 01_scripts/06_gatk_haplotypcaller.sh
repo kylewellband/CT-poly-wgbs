@@ -26,21 +26,23 @@ module load java/jdk/1.8.0_102
 for file in $(ls "$INPUT"/*.bam | perl -pe 's/\.bam//g')
 do
     name=$(basename $file)
-    
+
     echo "Calling SNPs in: $file"
-    
-	gatk --java-options $JAVA_OPTS \
-		HaplotypeCaller \
-		-R $GENOME \
-		-I "$file".bam \
-		-O $OUTPUT/$"$name"_gatk.vcf.gz \
-		-stand-call-conf 30.0 \
-		--dont-use-soft-clipped-bases \
-		--sample-ploidy $PLOIDY \
-		--max-reads-per-alignment-start $MAX_COV \
-		--max-alternate-alleles 3 \
-		--use-jdk-inflater \
-		--use-jdk-deflater
-    
+
+    parallel -j $NCPUS \ 
+        gatk --java-options $JAVA_OPTS \
+            HaplotypeCaller \
+            -R $GENOME \
+            -I "$file".bam \
+            -L {} \
+            -O $OUTPUT/$"$name"_gatk_{}.vcf.gz \
+            -stand-call-conf 30.0 \
+            --dont-use-soft-clipped-bases \
+            --sample-ploidy $PLOIDY \
+            --max-reads-per-alignment-start $MAX_COV \
+            --max-alternate-alleles 3 \
+            --use-jdk-inflater \
+            --use-jdk-deflater
+
 done
 
