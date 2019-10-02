@@ -29,8 +29,8 @@ do
 
     echo "Calling SNPs in: $file"
 
-    parallel -j $NCPUS \ 
-        gatk --java-options $JAVA_OPTS \
+    cut -f1 ${GENOME}.fai | 
+    parallel -j $NCPUS gatk --java-options $JAVA_OPTS \
             HaplotypeCaller \
             -R $GENOME \
             -I "$file".bam \
