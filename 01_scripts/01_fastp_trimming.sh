@@ -15,7 +15,7 @@ LENGTH=100 # This is good for PE100, consider increasing for longer reads (e.g. 
 QUAL=25
 INPUT="03_raw_data"
 OUTPUT="04_trimmed_reads"
-NCPUS=4
+NCPUS=1
 
 # Trim reads with fastp
 for file in $(ls "$INPUT"/*_R1.fastq.gz | perl -pe 's/_R[12]\.fastq\.gz//g')

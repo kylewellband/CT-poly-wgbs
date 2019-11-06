@@ -13,7 +13,7 @@ cp $SCRIPT $LOG_FOLDER/"$TIMESTAMP"_"$NAME"
 GENOME="02_reference/genome.fasta"  # Genomic reference.fasta
 INPUT="04_trimmed_reads"
 OUTPUT="05_aligned_bam"
-NCPUS=14
+NCPUS=6
 
 # Modules
 module load bwa
@@ -34,4 +34,4 @@ do
     
     samtools index "$OUTPUT"/"$name".bam
 
-done | tee $LOG_FOLDER/"$TIMESTAMP"_mapping.log
+done 2>&1 | tee $LOG_FOLDER/"$TIMESTAMP"_mapping.log

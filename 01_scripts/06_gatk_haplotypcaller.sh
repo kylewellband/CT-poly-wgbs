@@ -11,11 +11,11 @@ cp $SCRIPT $LOG_FOLDER/"$TIMESTAMP"_"$NAME"
 
 # Global variables
 GATK="/home/kylewellband/.bin/gatk/gatk" # Path to GATK4 wrapper
-JAVA_OPTS="-Xmx16G"
+JAVA_OPTS="-Xmx8G"
 GENOME="02_reference/genome.fasta"  # Genomic reference.fasta
 INPUT="07_clipped_overlap"
 OUTPUT="08_raw_vcfs"
-NCPUS=4
+NCPUS=1
 PLOIDY=80 # this should be N individuals x 2 for diploid organisms
 MAX_COV=100 # maximum depth, downsamples sites to $MAX_COV where depth > $MAX_COV
 
