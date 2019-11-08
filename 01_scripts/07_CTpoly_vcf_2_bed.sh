@@ -23,9 +23,9 @@ do
     
     echo "Processing VCF: $file"
     
-    gzcat "$file".vcf.gz | 
-    awk '($1 !~ "#.*") && ($4 == "C" && $5 == "T") || ($4 == "T" && $5 == "C") {
+    gunzip -c "$file".vcf.gz | 
+    awk '($1 !~ /"#*"/) && ($4 == "C" && $5 == "T") || ($4 == "T" && $5 == "C") || ($4 == "G" && $5 == "A") || ($4 == "A" && $5 == "G"){
     	print $1 "\t" $2 - 1 "\t" $2 "\t" $1 "_" $2 "\t" $4 "\t" $5
-    }' > $OUTPUT/"$name".bed
+    }' > $OUTPUT/"$name"_CT_AG_snps.bed
     
 done
