@@ -2,6 +2,7 @@
 *.bai
 *.bam
 *.bed
+*.dict
 *.fasta
 *.fasta.*
 *.fastq
