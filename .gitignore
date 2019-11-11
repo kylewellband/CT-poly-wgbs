@@ -1,13 +1,16 @@
 *.gtf
 *.bai
 *.bam
+*.bed
 *.fasta
+*.fasta.*
 *.fastq
 *.gz
 *.html
 *.ids
 *.json
 *.log
+*.Rhistory
 *.vcf
 *~
 10_log_files/*
