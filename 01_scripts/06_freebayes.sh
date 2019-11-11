@@ -36,6 +36,8 @@ do
         freebayes \
             -f $GENOME \
             --region {} \
+            --min-mapping-quality 20 \
+            --min-base-quality 20 \
             --min-coverage 10 --use-best-n-alleles 3 --min-alternate-count 2 \
             $POOL_MODEL \
             --limit-coverage $MAX_COV \
