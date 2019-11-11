@@ -32,7 +32,7 @@ do
     echo "Calling SNPs in: $file"
     
 	01_scripts/util/fasta_generate_regions.py "$GENOME".fai 1000000 | 
-    	parallel --progress --joblog $LOG_FOLDER/"$TIMESTAMP"_freebayes.log -k -j $NCPUS \
+    	parallel --bar --joblog $LOG_FOLDER/"$TIMESTAMP"_freebayes.log -k -j $NCPUS \
         freebayes \
             -f $GENOME \
             --region {} \
